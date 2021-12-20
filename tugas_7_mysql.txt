@@ -100,3 +100,61 @@ MariaDB [latihan7]> select * from data_ke_1;
 | Palembang |        14 |       107 |       369.22 |         1548064 |
 +-----------+-----------+-----------+--------------+-----------------+
 10 rows in set (0.000 sec)
+
+4. ========================================================================================================================
+
+MariaDB [latihan7]> create table data_ke_2 like data_ke_1;
+Query OK, 0 rows affected (0.033 sec)
+
+MariaDB [latihan7]> desc data_ke_2;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| Nama Kota       | varchar(10)  | YES  |     | NULL    |       |
+| Kecamatan       | int(11)      | YES  |     | NULL    |       |
+| Kelurahan       | int(4)       | YES  |     | NULL    |       |
+| Luas Wilayah    | decimal(5,2) | YES  |     | NULL    |       |
+| Jumlah Penduduk | int(11)      | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+5 rows in set (0.023 sec)
+
+5. ========================================================================================================================
+
+MariaDB [latihan7]> alter table data_ke_2
+    -> drop column kecamatan,
+    -> drop column kelurahan,
+    -> drop column `luas wilayah`;
+Query OK, 0 rows affected (0.019 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [latihan7]> desc data_ke_2;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| Nama Kota       | varchar(10) | YES  |     | NULL    |       |
+| Jumlah Penduduk | int(11)     | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+2 rows in set (0.019 sec)
+
+6. ========================================================================================================================
+
+MariaDB [latihan7]> insert into data_ke_2 select `nama kota`, `jumlah penduduk` from data_ke_1;
+Query OK, 10 rows affected (0.008 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+MariaDB [latihan7]> select * from data_ke_2;
++-----------+-----------------+
+| Nama Kota | Jumlah Penduduk |
++-----------+-----------------+
+| Jakarta   |         9988495 |
+| Surabaya  |         2805906 |
+| Medan     |         2465469 |
+| Bekasi    |         2381053 |
+| Bandung   |         2339463 |
+| Makasar   |         1566190 |
+| Depok     |         1631951 |
+| Semarang  |         1621384 |
+| Tangerang |         1566190 |
+| Palembang |         1548064 |
++-----------+-----------------+
+10 rows in set (0.000 sec)
